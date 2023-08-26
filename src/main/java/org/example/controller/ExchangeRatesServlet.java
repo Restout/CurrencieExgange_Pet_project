@@ -57,7 +57,8 @@ public class ExchangeRatesServlet extends HttpServlet {
             return;
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        // writer.write(objectMapper.writeValueAsString(result.get()));
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        writer.write(objectMapper.writeValueAsString(result.get()));
 
     }
 }

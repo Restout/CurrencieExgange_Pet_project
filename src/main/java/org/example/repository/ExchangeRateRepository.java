@@ -97,25 +97,7 @@ public class ExchangeRateRepository {
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.executeUpdate();
-            /*result = Optional.of(ExchangeRate
-                    .builder()
-                    .id(resultSet.getInt(1))
-                    .rate(resultSet.getBigDecimal(2))
-                    .baseCurrency(Currency
-                            .builder()
-                            .id(resultSet.getInt(3))
-                            .code(resultSet.getString(6))
-                            .fullName(resultSet.getString(6))
-                            .sign(resultSet.getString(8))
-                            .build())
-                    .targetCurrency(Currency
-                            .builder()
-                            .id(resultSet.getInt(4))
-                            .code(resultSet.getString(10))
-                            .fullName(resultSet.getString(11))
-                            .sign(resultSet.getString(12))
-                            .build())
-                    .build());*/
+            result = getExchangeRatByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
         } catch (SQLException e) {
             Validator.validateException(e.getMessage());
         }

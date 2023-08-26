@@ -9,18 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Forgotten files">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/dto/ExchangeRateDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRateServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRateServlet.java" afterDir="false" />
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Made Post method for ExchangeRateServlet&#10;Refactor of exceptions now extends SQLException">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRatesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRatesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/exceptions/UniqueConstraintException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/UniqueConstraintException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/exceptions/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/Validator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/ExcnahgeRate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/ExchangeRate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +202,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692700460427</updated>
       <workItem from="1692700461979" duration="4571000" />
-      <workItem from="1692777970498" duration="38380000" />
+      <workItem from="1692777970498" duration="39104000" />
     </task>
     <task id="LOCAL-00001" summary="FirstTestServlet">
       <created>1692705937131</created>
@@ -248,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693050378869</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Made Post method for ExchangeRateServlet&#10;Refactor of exceptions now extends SQLException">
+      <created>1693060618505</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1693060618505</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,7 +281,8 @@
     <MESSAGE value="Made getCurrency controlle/service/repository" />
     <MESSAGE value="Made ExhangeRates servlet" />
     <MESSAGE value="Forgotten files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Forgotten files" />
+    <MESSAGE value="Made Post method for ExchangeRateServlet&#10;Refactor of exceptions now extends SQLException" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made Post method for ExchangeRateServlet&#10;Refactor of exceptions now extends SQLException" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
