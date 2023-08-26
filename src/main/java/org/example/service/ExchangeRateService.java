@@ -22,4 +22,7 @@ public class ExchangeRateService {
     public Optional<ExchangeRate> putNewExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
         return exchangeRateRepository.setNewExchangeRate(exchangeRateDTO);
     }
+    public  Optional<ExchangeRate> setNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
+        return exchangeRateRepository.setNewRateToExistExchangeRate(exchangeRateDTO);
+    }
 }

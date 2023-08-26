@@ -103,4 +103,22 @@ public class ExchangeRateRepository {
         }
         return result;
     }
+
+    public Optional<ExchangeRate> setNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
+        String query = "UPDATE ExchangeRate" +
+                " SET Rate=" + exchangeRateDTO.getRate() +
+                " WHERE BaseCurrencyId=" +
+                "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE '" + exchangeRateDTO.getBaseCode() + "') " +
+                "AND TargetCurrencyId=" +
+                "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE '" + exchangeRateDTO.getTargetCode() + "')";
+        Optional<ExchangeRate> result = Optional.empty();
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.executeUpdate();
+            result = getExchangeRatByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
+        } catch (SQLException e) {
+            Validator.validateException(e.getMessage());
+        }
+        return result;
+    }
 }
