@@ -1,7 +1,6 @@
 package org.example.repository;
 
 import org.example.DataSource;
-import org.example.exceptions.UniqueConstraintException;
 import org.example.exceptions.Validator;
 import org.example.model.Currency;
 import org.sqlite.SQLiteDataSource;
@@ -9,6 +8,7 @@ import org.sqlite.SQLiteDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -57,7 +57,7 @@ public class CurrenciesRepository {
         return result;
     }
 
-    public boolean setNewCurrency(Currency currency) throws UniqueConstraintException {
+    public boolean setNewCurrency(Currency currency) throws SQLException {
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ")
                 .append("Currencies ")

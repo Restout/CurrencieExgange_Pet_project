@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 
-public class ExcnahgeRate {
+public class ExchangeRate {
     @JsonProperty
     int id;
     @JsonProperty

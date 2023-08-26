@@ -1,6 +1,8 @@
 package org.example.exceptions;
 
-public class UniqueConstraintException extends  Exception{
+import java.sql.SQLException;
+
+public class UniqueConstraintException extends SQLException {
     String message="Unique Constraint Exception";
     @Override
     public String getMessage() {
