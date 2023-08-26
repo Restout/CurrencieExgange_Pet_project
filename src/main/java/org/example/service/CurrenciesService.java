@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exceptions.UniqueConstraintException;
 import org.example.model.Currency;
 import org.example.repository.CurrenciesRepository;
 
@@ -21,7 +22,11 @@ public class CurrenciesService {
         return currenciesRepository.getCurrencyByCode(code);
     }
 
-    public Optional<Currency> setNewCurrency(Currency currency) {
-        return null;
+    public boolean setNewCurrency(Currency currency) throws UniqueConstraintException {
+        try {
+        return currenciesRepository.setNewCurrency(currency);
+        }catch (UniqueConstraintException e){
+            throw new UniqueConstraintException();
+        }
     }
 }

@@ -2,6 +2,7 @@ package org.example.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.example.exceptions.UniqueConstraintException;
 import org.example.model.Currency;
 import org.example.service.CurrenciesService;
 
@@ -45,7 +46,6 @@ public class CurrenciesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
         resp.setContentType("application/json");
         BufferedReader reader = req.getReader();
         StringBuilder requestBody = new StringBuilder();
@@ -56,6 +56,11 @@ public class CurrenciesServlet extends HttpServlet {
         reader.close();
         ObjectMapper objectMapper = new ObjectMapper();
         Currency currency = objectMapper.readValue(requestBody.toString(), Currency.class);
-currenciesService.setNewCurrency(currency);
+        try {
+            currenciesService.setNewCurrency(currency);
+        }catch (UniqueConstraintException e){
+            resp.setStatus(409);
+            return;
+        }
     }
 }
