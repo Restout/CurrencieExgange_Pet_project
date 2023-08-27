@@ -67,6 +67,10 @@ public class ExchangeRateServlet extends HttpServlet {
         String request = req.getRequestURI();
         BufferedReader reader = req.getReader();
         String requestBody = reader.readLine();
+        if(requestBody==null&&!requestBody.contains("rate=")){
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
         String rate = requestBody.replaceAll("rate=", "");
         String contextPath = req.getContextPath();
         String path = request.substring(contextPath.length());

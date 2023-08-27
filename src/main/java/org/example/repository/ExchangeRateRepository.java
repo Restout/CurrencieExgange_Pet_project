@@ -6,6 +6,7 @@ import org.example.model.Currency;
 import org.example.model.ExchangeRate;
 
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -121,4 +122,14 @@ public class ExchangeRateRepository {
         }
         return result;
     }
+
+    public BigDecimal findExchangeRateByCurrenciesCode(String baseCode, String targetCode) {
+        BigDecimal rate = null;
+        Optional<ExchangeRate> exchangeRate = getExchangeRatByBaseAndTargetCurrencies(baseCode, targetCode);
+        if (exchangeRate.isPresent()) {
+            rate = exchangeRate.get().getRate();
+        }
+        return rate;
+    }
+
 }

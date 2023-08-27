@@ -9,7 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Fix response of post method ExchangeRatesServlet">
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Made patchMethod for ExchangeRateServlet">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/dto/ExchangeAmountDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/dto/ExchangeDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRateServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRateServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" afterDir="false" />
@@ -204,7 +207,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692700460427</updated>
       <workItem from="1692700461979" duration="4571000" />
-      <workItem from="1692777970498" duration="46755000" />
+      <workItem from="1692777970498" duration="53162000" />
     </task>
     <task id="LOCAL-00001" summary="FirstTestServlet">
       <created>1692705937131</created>
@@ -255,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693061362459</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Made patchMethod for ExchangeRateServlet">
+      <created>1693077666560</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1693077666560</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,7 +302,8 @@
     <MESSAGE value="Forgotten files" />
     <MESSAGE value="Made Post method for ExchangeRateServlet&#10;Refactor of exceptions now extends SQLException" />
     <MESSAGE value="Fix response of post method ExchangeRatesServlet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix response of post method ExchangeRatesServlet" />
+    <MESSAGE value="Made patchMethod for ExchangeRateServlet" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made patchMethod for ExchangeRateServlet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -301,11 +312,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
           <line>11</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRatesServlet.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
