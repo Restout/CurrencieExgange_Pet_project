@@ -74,10 +74,11 @@ public class CurrenciesRepository {
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Record inserted successfully");
+                return true;
             }
         } catch (Exception e) {
             Validator.validateException(e.getMessage());
         }
-        return true;
+        return false;
     }
 }

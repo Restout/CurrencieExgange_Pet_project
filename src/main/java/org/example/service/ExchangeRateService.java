@@ -6,6 +6,7 @@ import org.example.model.ExchangeRate;
 import org.example.repository.ExchangeRateRepository;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -26,16 +27,16 @@ public class ExchangeRateService {
     }
 
     public Optional<ExchangeRate> setNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
-        return exchangeRateRepository.setNewRateToExistExchangeRate(exchangeRateDTO);
+        return exchangeRateRepository.updateNewRateToExistExchangeRate(exchangeRateDTO);
     }
 
     public Optional<BigDecimal> exchangeCurrencies(ExchangeDTO exchangeDTO) {
         BigDecimal rate;
-        if ((rate = exchangeRateRepository.findExchangeRateByCurrenciesCode(exchangeDTO.getBaseCode(), exchangeDTO.getTargetCode())) != null) {
+        if ((rate = findExchangeRateByCurrenciesCode(exchangeDTO.getBaseCode(), exchangeDTO.getTargetCode())) != null) {
             return Optional.of(rate.multiply(exchangeDTO.getAmount()));
 
         }
-        if ((rate = exchangeRateRepository.findExchangeRateByCurrenciesCode(exchangeDTO.getTargetCode(), exchangeDTO.getBaseCode())) != null) {
+        if ((rate = findExchangeRateByCurrenciesCode(exchangeDTO.getTargetCode(), exchangeDTO.getBaseCode())) != null) {
             return Optional.of(rate.divide(exchangeDTO.getAmount()));
 
         }
@@ -48,12 +49,21 @@ public class ExchangeRateService {
     public BigDecimal getExchangeRateByUSDRates(String baseCode, String targetCode) {
         BigDecimal baseRate;
         BigDecimal targetRate;
-        baseRate = exchangeRateRepository.findExchangeRateByCurrenciesCode("USD", baseCode);
-        targetRate = exchangeRateRepository.findExchangeRateByCurrenciesCode("USD", baseCode);
+        baseRate = findExchangeRateByCurrenciesCode("USD", baseCode);
+        targetRate = findExchangeRateByCurrenciesCode("USD", baseCode);
         if (baseCode != null && targetCode != null) {
-            return targetRate.divide(baseRate);
+            return targetRate.divide(baseRate).setScale(2, RoundingMode.HALF_EVEN);
         }
         return null;
 
+    }
+
+    private BigDecimal findExchangeRateByCurrenciesCode(String baseCode, String targetCode) {
+        BigDecimal rate = null;
+        Optional<ExchangeRate> exchangeRate = exchangeRateRepository.getExchangeRatByBaseAndTargetCurrencies(baseCode, targetCode);
+        if (exchangeRate.isPresent()) {
+            rate = exchangeRate.get().getRate();
+        }
+        return rate;
     }
 }
