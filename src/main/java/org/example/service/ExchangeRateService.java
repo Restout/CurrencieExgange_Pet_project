@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.dto.ExchangeDTO;
 import org.example.dto.ExchangeRateDTO;
+import org.example.model.Currency;
 import org.example.model.ExchangeRate;
 import org.example.repository.ExchangeRateRepository;
 
@@ -15,19 +16,23 @@ public class ExchangeRateService {
     ExchangeRateRepository exchangeRateRepository = new ExchangeRateRepository();
 
     public List<ExchangeRate> getListOfExchangeRates() {
-        return exchangeRateRepository.getListOfExchangeRates();
+        return exchangeRateRepository.getAll();
     }
 
     public Optional<ExchangeRate> getExchangeRateByBaseAndTargetCurrencies(String base, String target) {
-        return exchangeRateRepository.getExchangeRatByBaseAndTargetCurrencies(base, target);
+        return exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(base, target);
     }
 
     public Optional<ExchangeRate> putNewExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
-        return exchangeRateRepository.setNewExchangeRate(exchangeRateDTO);
+        ExchangeRate exchangeRate = new ExchangeRate(0, exchangeRateDTO.getRate(), new Currency(exchangeRateDTO.getBaseCode()), new Currency(exchangeRateDTO.getTargetCode()));
+        exchangeRateRepository.create(exchangeRate);
+        return exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
     }
 
     public Optional<ExchangeRate> setNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
-        return exchangeRateRepository.updateNewRateToExistExchangeRate(exchangeRateDTO);
+        ExchangeRate exchangeRate = new ExchangeRate(0, exchangeRateDTO.getRate(), new Currency(exchangeRateDTO.getBaseCode()), new Currency(exchangeRateDTO.getTargetCode()));
+        exchangeRateRepository.update(exchangeRate);
+        return exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
     }
 
     public Optional<BigDecimal> exchangeCurrencies(ExchangeDTO exchangeDTO) {
@@ -60,7 +65,7 @@ public class ExchangeRateService {
 
     private BigDecimal findExchangeRateByCurrenciesCode(String baseCode, String targetCode) {
         BigDecimal rate = null;
-        Optional<ExchangeRate> exchangeRate = exchangeRateRepository.getExchangeRatByBaseAndTargetCurrencies(baseCode, targetCode);
+        Optional<ExchangeRate> exchangeRate = exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(baseCode, targetCode);
         if (exchangeRate.isPresent()) {
             rate = exchangeRate.get().getRate();
         }

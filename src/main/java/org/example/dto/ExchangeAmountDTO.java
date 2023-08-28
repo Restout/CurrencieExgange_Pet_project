@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class ExchangeAmountDTO {
     Currency baseCurrency;
     Currency targetCurrency;

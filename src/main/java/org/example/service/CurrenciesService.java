@@ -16,7 +16,7 @@ public class CurrenciesService {
     }
 
     public List<Currency> getCurrencies() {
-        return currenciesRepository.getCurrenciesList();
+        return currenciesRepository.getAll();
     }
 
     public Optional<Currency> getCurrencyByCode(String code) {
@@ -25,7 +25,7 @@ public class CurrenciesService {
 
     public Optional<Currency> setNewCurrency(Currency currency) throws UniqueConstraintException {
         try {
-            currenciesRepository.setNewCurrency(currency);
+            currenciesRepository.create(currency);
         } catch (SQLException e) {
             throw new UniqueConstraintException();
         }

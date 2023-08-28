@@ -11,6 +11,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 public class Currency implements Serializable {
+    public Currency(String code) {
+        this.code = code;
+    }
+
     @JsonProperty
     int id;
     @JsonProperty

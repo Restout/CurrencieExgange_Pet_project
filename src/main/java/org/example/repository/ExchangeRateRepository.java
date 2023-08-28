@@ -1,6 +1,5 @@
 package org.example.repository;
 
-import org.example.dto.ExchangeRateDTO;
 import org.example.exceptions.Validator;
 import org.example.model.Currency;
 import org.example.model.ExchangeRate;
@@ -14,16 +13,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ExchangeRateRepository {
+public class ExchangeRateRepository implements CrudRepository<ExchangeRate> {
     DataSource dataSource = org.example.DataSource.getDataSource();
+    private final String SELECT_ALL = "SELECT *FROM ExchangeRate " +
+            "JOIN Currencies c ON c.ID=BaseCurrencyId " +
+            "JOIN Currencies c2 ON c2.ID=TargetCurrencyId;";
+    private final String SELECT_BY_CODES = "SELECT *FROM ExchangeRate er\n" +
+            "JOIN Currencies c ON c.ID=er.BaseCurrencyId\n" +
+            "JOIN Currencies c2 ON c2.ID=er.TargetCurrencyId\n" +
+            "WHERE c.Code LIKE ? AND c2.Code LIKE ?; \n";
+    private final String CREATE = "INSERT INTO ExchangeRate (BaseCurrencyId,TargetCurrencyId,Rate) VALUES( " +
+            "(SELECT ID FROM Currencies WHERE Code LIKE ?), " +
+            "(SELECT ID FROM Currencies WHERE Code LIKE ?), ?)";
+    private final String UPDATE = "UPDATE ExchangeRate" +
+            " SET Rate=?" +
+            " WHERE BaseCurrencyId=" +
+            "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE ?) " +
+            "AND TargetCurrencyId=" +
+            "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE ?)";
 
-    public List<ExchangeRate> getListOfExchangeRates() {
-        String query = "SELECT *FROM ExchangeRate " +
-                "JOIN Currencies c ON c.ID=BaseCurrencyId " +
-                "JOIN Currencies c2 ON c2.ID=TargetCurrencyId;";
+    @Override
+    public List<ExchangeRate> getAll() {
         List<ExchangeRate> result = new ArrayList<>();
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 result.add(ExchangeRate
@@ -52,14 +65,10 @@ public class ExchangeRateRepository {
         return result;
     }
 
-    public Optional<ExchangeRate> getExchangeRatByBaseAndTargetCurrencies(String base, String target) {
-        String query = "SELECT *FROM ExchangeRate er\n" +
-                "JOIN Currencies c ON c.ID=er.BaseCurrencyId\n" +
-                "JOIN Currencies c2 ON c2.ID=er.TargetCurrencyId\n" +
-                "WHERE c.Code LIKE ? AND c2.Code LIKE ?; \n";
+    public Optional<ExchangeRate> getExchangeRateByBaseAndTargetCurrencies(String base, String target) {
         Optional<ExchangeRate> result = Optional.empty();
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_CODES);
             preparedStatement.setString(1, base);
             preparedStatement.setString(2, target);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -88,43 +97,34 @@ public class ExchangeRateRepository {
         return result;
     }
 
-    public Optional<ExchangeRate> setNewExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
-        String query = "INSERT INTO ExchangeRate (BaseCurrencyId,TargetCurrencyId,Rate) VALUES( " +
-                "(SELECT ID FROM Currencies WHERE Code LIKE ?), " +
-                "(SELECT ID FROM Currencies WHERE Code LIKE ?), ?)";
-        Optional<ExchangeRate> result = Optional.empty();
+    @Override
+    public void create(ExchangeRate exchangeRate) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, exchangeRateDTO.getBaseCode());
-            preparedStatement.setString(1, exchangeRateDTO.getTargetCode());
-            preparedStatement.setBigDecimal(1, exchangeRateDTO.getRate());
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE);
+            preparedStatement.setString(1, exchangeRate.getBaseCurrency().getCode());
+            preparedStatement.setString(2, exchangeRate.getTargetCurrency().getCode());
+            preparedStatement.setBigDecimal(3, exchangeRate.getRate());
             preparedStatement.executeUpdate();
-            result = getExchangeRatByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
         } catch (SQLException e) {
             Validator.validateException(e.getMessage());
         }
-        return result;
     }
 
-    public Optional<ExchangeRate> updateNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
-        String query = "UPDATE ExchangeRate" +
-                " SET Rate=?" +
-                " WHERE BaseCurrencyId=" +
-                "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE ?) " +
-                "AND TargetCurrencyId=" +
-                "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE ?)";
-        Optional<ExchangeRate> result = Optional.empty();
+    public void update(ExchangeRate exchangeRate) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setBigDecimal(1, exchangeRateDTO.getRate());
-            preparedStatement.setString(1, exchangeRateDTO.getBaseCode());
-            preparedStatement.setString(1, exchangeRateDTO.getTargetCode());
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setBigDecimal(1, exchangeRate.getRate());
+            preparedStatement.setString(2, exchangeRate.getBaseCurrency().getCode());
+            preparedStatement.setString(3, exchangeRate.getTargetCurrency().getCode());
             preparedStatement.executeUpdate();
-            result = getExchangeRatByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
         } catch (SQLException e) {
             Validator.validateException(e.getMessage());
         }
-        return result;
+    }
+
+    @Override
+    public void delete(ExchangeRate object) {
+
     }
 
 

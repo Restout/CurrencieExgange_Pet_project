@@ -46,7 +46,7 @@ public class ExchangeRatesServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO(baseCode, targetCode, new BigDecimal(rate));
         try {
-            writer.write(objectMapper.writeValueAsString(exchangeRateService.putNewExchangeRate(exchangeRateDTO)));
+            writer.write(objectMapper.writeValueAsString(exchangeRateService.putNewExchangeRate(exchangeRateDTO).get()));
         } catch (SQLException e) {
             writer.write(e.getMessage());
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
