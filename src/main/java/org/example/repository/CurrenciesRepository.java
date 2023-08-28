@@ -41,8 +41,9 @@ public class CurrenciesRepository {
     public Optional<Currency> getCurrencyByCode(String code) {
         Optional<Currency> result;
         try (Connection con = dataSource.getConnection()) {
-            String query = "SELECT * FROM Currencies WHERE Code LIKE '" + code + "'";
+            String query = "SELECT * FROM Currencies WHERE Code LIKE ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1,code);
             ResultSet resultSet = preparedStatement.executeQuery();
             result = Optional.of(Currency
                     .builder()

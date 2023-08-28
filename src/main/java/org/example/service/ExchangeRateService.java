@@ -30,7 +30,7 @@ public class ExchangeRateService {
     }
 
     public Optional<BigDecimal> exchangeCurrencies(ExchangeDTO exchangeDTO) {
-        BigDecimal rate = null;
+        BigDecimal rate;
         if ((rate = exchangeRateRepository.findExchangeRateByCurrenciesCode(exchangeDTO.getBaseCode(), exchangeDTO.getTargetCode())) != null) {
             return Optional.of(rate.multiply(exchangeDTO.getAmount()));
 

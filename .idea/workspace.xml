@@ -9,24 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Refactore: change access modifier of controllers">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/EncodingFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/CurrenciesServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/CurrencyServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeRateServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeRatesServlet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/TestServletController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeAmountDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeAmountDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO$ExchangeRateDTOBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/CurrenciesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/CurrencyServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrencyServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRateServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRateServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeRatesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRatesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/TestServletController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/dto/ExchangeRateDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/dto/ExchangeRateDTO.java" afterDir="false" />
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Refactore: added encodingFilter for servlets">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +204,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692700460427</updated>
       <workItem from="1692700461979" duration="4571000" />
-      <workItem from="1692777970498" duration="59251000" />
+      <workItem from="1692777970498" duration="60737000" />
     </task>
     <task id="LOCAL-00001" summary="FirstTestServlet">
       <created>1692705937131</created>
@@ -303,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693213976806</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Refactore: added encodingFilter for servlets">
+      <created>1693215453842</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1693215453842</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +338,8 @@
     <MESSAGE value="Made exhange servlet to exchange value" />
     <MESSAGE value="Refactore: rafactore of controllers base" />
     <MESSAGE value="Refactore: change access modifier of controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactore: change access modifier of controllers" />
+    <MESSAGE value="Refactore: added encodingFilter for servlets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactore: added encodingFilter for servlets" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

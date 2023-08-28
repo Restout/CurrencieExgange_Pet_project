@@ -23,11 +23,12 @@ public class CurrenciesService {
         return currenciesRepository.getCurrencyByCode(code);
     }
 
-    public boolean setNewCurrency(Currency currency) throws UniqueConstraintException {
+    public Optional<Currency> setNewCurrency(Currency currency) throws UniqueConstraintException {
         try {
-        return currenciesRepository.setNewCurrency(currency);
-        }catch (SQLException e){
+            currenciesRepository.setNewCurrency(currency);
+        } catch (SQLException e) {
             throw new UniqueConstraintException();
         }
+        return getCurrencyByCode(currency.getCode());
     }
 }

@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/currencies")
 public class CurrenciesServlet extends HttpServlet {
@@ -54,11 +55,18 @@ public class CurrenciesServlet extends HttpServlet {
         reader.close();
         Currency currency = objectMapper.readValue(requestBody.toString(), Currency.class);
         try {
-            currenciesService.setNewCurrency(currency);
+            Optional<Currency> currencyOptional = currenciesService.setNewCurrency(currency);
+            if (currencyOptional.isEmpty()) {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+            PrintWriter writer = resp.getWriter();
+            writer.write(objectMapper.writeValueAsString(currencyOptional.get()));
+
         } catch (UniqueConstraintException e) {
             resp.setStatus(409);
         } catch (Exception e) {
             resp.setStatus(500);
         }
+
     }
 }
