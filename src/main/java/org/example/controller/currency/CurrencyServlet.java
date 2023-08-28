@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.currency;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -30,7 +30,6 @@ public class CurrencyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         String[] params = Utils.getParametersOfRequestFromURL(req);
         if(params.length==2){

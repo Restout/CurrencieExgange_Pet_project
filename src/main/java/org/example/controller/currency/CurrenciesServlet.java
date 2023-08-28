@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.currency;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -31,7 +31,6 @@ public class CurrenciesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
         PrintWriter printWriter = resp.getWriter();
         List<Currency> currencies = currenciesService.getCurrencies();
         if (currencies.isEmpty()) {
@@ -46,7 +45,6 @@ public class CurrenciesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
         BufferedReader reader = req.getReader();
         StringBuilder requestBody = new StringBuilder();
         String line;

@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.exchange;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -44,7 +44,6 @@ public class ExchangeRateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("txt/html");
         PrintWriter writer = resp.getWriter();
         String[] params = Utils.getParametersOfRequestFromURL(req);
         if (params.length <= 2) {

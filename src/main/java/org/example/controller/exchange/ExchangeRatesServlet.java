@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.exchange;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -32,7 +32,6 @@ public class ExchangeRatesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         List<ExchangeRate> result = exchangeRateService.getListOfExchangeRates();
         String jsonResult = objectMapper.writeValueAsString(result);
@@ -44,7 +43,6 @@ public class ExchangeRatesServlet extends HttpServlet {
         String baseCode = req.getParameter("baseCurrencyCode");
         String targetCode = req.getParameter("targetCurrencyCode");
         String rate = req.getParameter("rate");
-        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO(baseCode, targetCode, new BigDecimal(rate));
         try {
