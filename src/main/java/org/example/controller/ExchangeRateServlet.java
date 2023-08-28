@@ -2,6 +2,7 @@ package org.example.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.example.Utils;
 import org.example.dto.ExchangeRateDTO;
 import org.example.model.ExchangeRate;
 import org.example.service.ExchangeRateService;
@@ -21,11 +22,14 @@ import java.util.Optional;
 @WebServlet("/exchangeRate/*")
 public class ExchangeRateServlet extends HttpServlet {
     ExchangeRateService exchangeRateService;
+    ObjectMapper objectMapper;
 
 
     @Override
     public void init() throws ServletException {
         exchangeRateService = new ExchangeRateService();
+        objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Enable pretty-printing
         super.init();
     }
 
@@ -42,11 +46,8 @@ public class ExchangeRateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("txt/html");
         PrintWriter writer = resp.getWriter();
-        String request = req.getRequestURI();
-        String contextPath = req.getContextPath();
-        String path = request.substring(contextPath.length());
-        String[] params = path.split("/");
-        if (params.length == 2) {
+        String[] params = Utils.getParametersOfRequestFromURL(req);
+        if (params.length <= 2) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
@@ -57,40 +58,32 @@ public class ExchangeRateServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         writer.write(objectMapper.writeValueAsString(exchangeRateOptional.get()));
     }
 
     protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter writer = resp.getWriter();
-        String request = req.getRequestURI();
         BufferedReader reader = req.getReader();
         String requestBody = reader.readLine();
-        if(requestBody==null&&!requestBody.contains("rate=")){
+        if (requestBody == null && !requestBody.contains("rate=")) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         String rate = requestBody.replaceAll("rate=", "");
-        String contextPath = req.getContextPath();
-        String path = request.substring(contextPath.length());
-        String[] params = path.split("/");
-        if (params.length == 2) {
+        String[] params = Utils.getParametersOfRequestFromURL(req);
+        if (params.length <= 2) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
         String baseCurrency = params[2].substring(0, 3);
         String targetCurrency = params[2].substring(3);
-        Optional<ExchangeRate> result = Optional.empty();
         ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO(baseCurrency, targetCurrency, new BigDecimal(rate));
         try {
-            result = exchangeRateService.setNewRateToExistExchangeRate(exchangeRateDTO);
+            writer.write(objectMapper.writeValueAsString(exchangeRateService.setNewRateToExistExchangeRate(exchangeRateDTO)));
         } catch (SQLException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        writer.write(objectMapper.writeValueAsString(result.get()));
+
 
     }
 

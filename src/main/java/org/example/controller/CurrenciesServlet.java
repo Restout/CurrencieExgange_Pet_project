@@ -19,25 +19,25 @@ import java.util.List;
 @WebServlet("/currencies")
 public class CurrenciesServlet extends HttpServlet {
     CurrenciesService currenciesService;
+    ObjectMapper objectMapper;
 
     @Override
     public void init() throws ServletException {
         currenciesService = new CurrenciesService();
+        objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Enable pretty-printing
         super.init();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("txt/html");
-
+        resp.setContentType("application/json");
         PrintWriter printWriter = resp.getWriter();
         List<Currency> currencies = currenciesService.getCurrencies();
         if (currencies.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             printWriter.write("Nothing was Found");
         } else {
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Enable pretty-printing
             String cursString = objectMapper.writeValueAsString(currencies);
             resp.setStatus(HttpServletResponse.SC_OK);
             printWriter.write(cursString);
@@ -54,13 +54,13 @@ public class CurrenciesServlet extends HttpServlet {
             requestBody.append(line);
         }
         reader.close();
-        ObjectMapper objectMapper = new ObjectMapper();
         Currency currency = objectMapper.readValue(requestBody.toString(), Currency.class);
         try {
             currenciesService.setNewCurrency(currency);
-        }catch (UniqueConstraintException e){
+        } catch (UniqueConstraintException e) {
             resp.setStatus(409);
-            return;
+        } catch (Exception e) {
+            resp.setStatus(500);
         }
     }
 }

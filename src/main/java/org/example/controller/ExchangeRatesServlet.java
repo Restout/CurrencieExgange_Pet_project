@@ -21,21 +21,21 @@ import java.util.Optional;
 @WebServlet("/exchangeRates")
 public class ExchangeRatesServlet extends HttpServlet {
     ExchangeRateService exchangeRateService;
+    ObjectMapper objectMapper;
 
     @Override
     public void init() throws ServletException {
         exchangeRateService = new ExchangeRateService();
-
+        objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Enable pretty-printing
         super.init();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("txt/html");
+        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
-        ObjectMapper objectMapper = new ObjectMapper();
         List<ExchangeRate> result = exchangeRateService.getListOfExchangeRates();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         String jsonResult = objectMapper.writeValueAsString(result);
         writer.write(jsonResult);
     }
@@ -45,20 +45,14 @@ public class ExchangeRatesServlet extends HttpServlet {
         String baseCode = req.getParameter("baseCurrencyCode");
         String targetCode = req.getParameter("targetCurrencyCode");
         String rate = req.getParameter("rate");
-        resp.setContentType("txt/html");
+        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
         ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO(baseCode, targetCode, new BigDecimal(rate));
-        Optional<ExchangeRate> result = Optional.empty();
         try {
-            result = exchangeRateService.putNewExchangeRate(exchangeRateDTO);
+            writer.write(objectMapper.writeValueAsString(exchangeRateService.putNewExchangeRate(exchangeRateDTO)));
         } catch (SQLException e) {
             writer.write(e.getMessage());
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        writer.write(objectMapper.writeValueAsString(result.get()));
-
     }
 }

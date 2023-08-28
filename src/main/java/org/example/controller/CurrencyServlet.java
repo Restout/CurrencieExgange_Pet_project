@@ -2,6 +2,7 @@ package org.example.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.example.Utils;
 import org.example.model.Currency;
 import org.example.service.CurrenciesService;
 
@@ -17,21 +18,20 @@ import java.util.Optional;
 @WebServlet("/currency/*")
 public class CurrencyServlet extends HttpServlet {
     CurrenciesService currenciesService;
-
+    ObjectMapper objectMapper;
     @Override
     public void init() throws ServletException {
         currenciesService = new CurrenciesService();
+        objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Enable pretty-printing
         super.init();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("txt/html");
+        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
-        String request = req.getRequestURI();
-        String contextPath = req.getContextPath();
-        String path = request.substring(contextPath.length());
-        String[] params = path.split("/");
+        String[] params = Utils.getParametersOfRequestFromURL(req);
         if(params.length==2){
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
@@ -43,8 +43,6 @@ public class CurrencyServlet extends HttpServlet {
             writer.write("No Currency with given code");
             return;
         }
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // Enable pretty-printing
         String currencyJson = objectMapper.writeValueAsString(currencyOptional.get());
         writer.write(currencyJson);
     }
