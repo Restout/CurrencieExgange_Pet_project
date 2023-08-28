@@ -2,6 +2,7 @@ package org.example.service;
 
 import org.example.dto.ExchangeDTO;
 import org.example.dto.ExchangeRateDTO;
+import org.example.exceptions.EntityNotFoundException;
 import org.example.model.Currency;
 import org.example.model.ExchangeRate;
 import org.example.repository.ExchangeRateRepository;
@@ -29,10 +30,14 @@ public class ExchangeRateService {
         return exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
     }
 
-    public Optional<ExchangeRate> setNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
+    public ExchangeRate setNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
         ExchangeRate exchangeRate = new ExchangeRate(0, exchangeRateDTO.getRate(), new Currency(exchangeRateDTO.getBaseCode()), new Currency(exchangeRateDTO.getTargetCode()));
+        Optional<ExchangeRate> result = exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
+        if (result.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
         exchangeRateRepository.update(exchangeRate);
-        return exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
+        return result.get();
     }
 
     public Optional<BigDecimal> exchangeCurrencies(ExchangeDTO exchangeDTO) {

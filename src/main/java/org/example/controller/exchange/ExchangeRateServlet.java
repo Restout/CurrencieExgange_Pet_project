@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.example.Utils;
 import org.example.dto.ExchangeRateDTO;
+import org.example.exceptions.EntityNotFoundException;
 import org.example.model.ExchangeRate;
 import org.example.service.ExchangeRateService;
 
@@ -43,7 +44,7 @@ public class ExchangeRateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter writer = resp.getWriter();
         String[] params = Utils.getParametersOfRequestFromURL(req);
         if (params.length <= 2) {
@@ -53,10 +54,6 @@ public class ExchangeRateServlet extends HttpServlet {
         String baseCurrency = params[2].substring(0, 3);
         String targetCurrency = params[2].substring(3);
         Optional<ExchangeRate> exchangeRateOptional = exchangeRateService.getExchangeRateByBaseAndTargetCurrencies(baseCurrency, targetCurrency);
-        if (exchangeRateOptional.isEmpty()) {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
         writer.write(objectMapper.writeValueAsString(exchangeRateOptional.get()));
     }
 
@@ -78,7 +75,10 @@ public class ExchangeRateServlet extends HttpServlet {
         String targetCurrency = params[2].substring(3);
         ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO(baseCurrency, targetCurrency, new BigDecimal(rate));
         try {
-            writer.write(objectMapper.writeValueAsString(exchangeRateService.setNewRateToExistExchangeRate(exchangeRateDTO).get()));
+            writer.write(objectMapper.writeValueAsString(exchangeRateService.setNewRateToExistExchangeRate(exchangeRateDTO)));
+        } catch (EntityNotFoundException e) {
+            writer.write(e.getMessage());
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
         } catch (SQLException e) {
             writer.write(e.getMessage());
             resp.setStatus(500);
