@@ -3,6 +3,7 @@ package org.example.controller.exchange;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.example.dto.ExchangeRateDTO;
+import org.example.exceptions.UniqueConstraintException;
 import org.example.model.ExchangeRate;
 import org.example.service.ExchangeRateService;
 
@@ -47,9 +48,12 @@ public class ExchangeRatesServlet extends HttpServlet {
         ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO(baseCode, targetCode, new BigDecimal(rate));
         try {
             writer.write(objectMapper.writeValueAsString(exchangeRateService.putNewExchangeRate(exchangeRateDTO).get()));
+        } catch (UniqueConstraintException e) {
+            writer.write(e.getMessage());
+            resp.setStatus(409);
         } catch (SQLException e) {
             writer.write(e.getMessage());
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            resp.setStatus(500);
         }
     }
 }

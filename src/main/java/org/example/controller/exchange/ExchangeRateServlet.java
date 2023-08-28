@@ -80,7 +80,8 @@ public class ExchangeRateServlet extends HttpServlet {
         try {
             writer.write(objectMapper.writeValueAsString(exchangeRateService.setNewRateToExistExchangeRate(exchangeRateDTO).get()));
         } catch (SQLException e) {
-            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.write(e.getMessage());
+            resp.setStatus(500);
         }
 
 

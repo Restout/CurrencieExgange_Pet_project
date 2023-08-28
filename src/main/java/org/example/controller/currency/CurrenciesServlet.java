@@ -47,21 +47,19 @@ public class CurrenciesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader reader = req.getReader();
-        StringBuilder requestBody = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            requestBody.append(line);
+     String id=req.getParameter("id");
+        String name=req.getParameter("name");
+        String code=req.getParameter("code");
+        String sign=req.getParameter("sign");
+        if(id==null||name==null||code==null||sign==null){
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
         }
-        reader.close();
-        Currency currency = objectMapper.readValue(requestBody.toString(), Currency.class);
+        Currency currency=new Currency(Integer.valueOf(id),code,name,sign);
         try {
             Optional<Currency> currencyOptional = currenciesService.setNewCurrency(currency);
-            if (currencyOptional.isEmpty()) {
-                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            }
             PrintWriter writer = resp.getWriter();
             writer.write(objectMapper.writeValueAsString(currencyOptional.get()));
-
         } catch (UniqueConstraintException e) {
             resp.setStatus(409);
         } catch (Exception e) {
