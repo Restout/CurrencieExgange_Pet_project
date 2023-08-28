@@ -18,7 +18,7 @@ public class ExchangeRateService {
         return exchangeRateRepository.getListOfExchangeRates();
     }
 
-    public Optional<ExchangeRate> getExchangeRatByBaseAndTargetCurrencies(String base, String target) {
+    public Optional<ExchangeRate> getExchangeRateByBaseAndTargetCurrencies(String base, String target) {
         return exchangeRateRepository.getExchangeRatByBaseAndTargetCurrencies(base, target);
     }
 

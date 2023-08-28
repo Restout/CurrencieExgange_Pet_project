@@ -52,7 +52,7 @@ public class ExchangeRateServlet extends HttpServlet {
         }
         String baseCurrency = params[2].substring(0, 3);
         String targetCurrency = params[2].substring(3);
-        Optional<ExchangeRate> exchangeRateOptional = exchangeRateService.getExchangeRatByBaseAndTargetCurrencies(baseCurrency, targetCurrency);
+        Optional<ExchangeRate> exchangeRateOptional = exchangeRateService.getExchangeRateByBaseAndTargetCurrencies(baseCurrency, targetCurrency);
         if (exchangeRateOptional.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;

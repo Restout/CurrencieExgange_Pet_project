@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Refactore: added encodingFilter for servlets">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" afterDir="false" />
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Refactore: refactor CurrenciesRepository and postMethod of CurrenciesServlet now returns json of posted currencie">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +203,7 @@
       <option name="presentableId" value="Default" />
       <updated>1692700460427</updated>
       <workItem from="1692700461979" duration="4571000" />
-      <workItem from="1692777970498" duration="60737000" />
+      <workItem from="1692777970498" duration="61696000" />
     </task>
     <task id="LOCAL-00001" summary="FirstTestServlet">
       <created>1692705937131</created>
@@ -297,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693215453842</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Refactore: refactor CurrenciesRepository and postMethod of CurrenciesServlet now returns json of posted currencie">
+      <created>1693221627023</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1693221627023</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -339,7 +345,8 @@
     <MESSAGE value="Refactore: rafactore of controllers base" />
     <MESSAGE value="Refactore: change access modifier of controllers" />
     <MESSAGE value="Refactore: added encodingFilter for servlets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactore: added encodingFilter for servlets" />
+    <MESSAGE value="Refactore: refactor CurrenciesRepository and postMethod of CurrenciesServlet now returns json of posted currencie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactore: refactor CurrenciesRepository and postMethod of CurrenciesServlet now returns json of posted currencie" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
