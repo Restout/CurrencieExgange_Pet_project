@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.example.dto.ExchangeAmountDTO;
 import org.example.dto.ExchangeDTO;
 import org.example.model.Currency;
-import org.example.model.ExchangeRate;
 import org.example.service.CurrenciesService;
 import org.example.service.ExchangeRateService;
 
@@ -14,22 +13,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Optional;
 
 @WebServlet("/exchange")
 public class ExchangeServlet extends HttpServlet {
-    DataSource dataSource;
-    ExchangeRateService exchangeRateService;
-    CurrenciesService currenciesService;
-    ObjectMapper objectMapper;
+    private ExchangeRateService exchangeRateService;
+    private CurrenciesService currenciesService;
+    private ObjectMapper objectMapper;
 
     @Override
     public void init() throws ServletException {
-        dataSource = org.example.DataSource.getDataSource();
         exchangeRateService = new ExchangeRateService();
         currenciesService = new CurrenciesService();
         objectMapper = new ObjectMapper();
@@ -47,16 +44,18 @@ public class ExchangeServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        ExchangeDTO exchangeDTO = new ExchangeDTO(baseCurrencyCode, targetCurrencyCode, new BigDecimal(amount));
+        BigDecimal ammountDeci = new BigDecimal(amount).setScale(2,RoundingMode.HALF_EVEN);
+        ExchangeDTO exchangeDTO = new ExchangeDTO(baseCurrencyCode, targetCurrencyCode, ammountDeci);
         Optional<BigDecimal> exchangeAmount = exchangeRateService.exchangeCurrencies(exchangeDTO);
         if (exchangeAmount.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
+        BigDecimal rate = exchangeAmount.get().divide(ammountDeci).setScale(2, RoundingMode.HALF_EVEN);
         Currency baseCurrency = currenciesService.getCurrencyByCode(baseCurrencyCode).get();
         Currency targetCurrency = currenciesService.getCurrencyByCode(targetCurrencyCode).get();
 
-        ExchangeAmountDTO exchangeAmountDTO = new ExchangeAmountDTO(new ExchangeRate(0, new BigDecimal(10), baseCurrency, targetCurrency), new BigDecimal(amount), exchangeAmount.get());
+        ExchangeAmountDTO exchangeAmountDTO = new ExchangeAmountDTO(baseCurrency, targetCurrency, rate, ammountDeci, exchangeAmount.get());
         writer.write(objectMapper.writeValueAsString(exchangeAmountDTO));
 
     }

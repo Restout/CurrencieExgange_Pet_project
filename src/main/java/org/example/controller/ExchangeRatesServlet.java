@@ -16,12 +16,11 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet("/exchangeRates")
 public class ExchangeRatesServlet extends HttpServlet {
-    ExchangeRateService exchangeRateService;
-    ObjectMapper objectMapper;
+    private ExchangeRateService exchangeRateService;
+    private ObjectMapper objectMapper;
 
     @Override
     public void init() throws ServletException {

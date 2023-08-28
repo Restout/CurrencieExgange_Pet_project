@@ -18,8 +18,8 @@ import java.util.List;
 
 @WebServlet("/currencies")
 public class CurrenciesServlet extends HttpServlet {
-    CurrenciesService currenciesService;
-    ObjectMapper objectMapper;
+    private CurrenciesService currenciesService;
+    private ObjectMapper objectMapper;
 
     @Override
     public void init() throws ServletException {

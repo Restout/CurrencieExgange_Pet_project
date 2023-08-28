@@ -17,8 +17,9 @@ import java.util.Optional;
 
 @WebServlet("/currency/*")
 public class CurrencyServlet extends HttpServlet {
-    CurrenciesService currenciesService;
-    ObjectMapper objectMapper;
+    private CurrenciesService currenciesService;
+    private ObjectMapper objectMapper;
+
     @Override
     public void init() throws ServletException {
         currenciesService = new CurrenciesService();

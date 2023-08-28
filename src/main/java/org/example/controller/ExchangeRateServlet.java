@@ -21,8 +21,8 @@ import java.util.Optional;
 
 @WebServlet("/exchangeRate/*")
 public class ExchangeRateServlet extends HttpServlet {
-    ExchangeRateService exchangeRateService;
-    ObjectMapper objectMapper;
+    private ExchangeRateService exchangeRateService;
+    private ObjectMapper objectMapper;
 
 
     @Override
