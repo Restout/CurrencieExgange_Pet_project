@@ -9,13 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="AddFile: added bd into project to easy deploy">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" afterDir="false" />
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Fiexes: fixe bug where post method dont see params and bug with division at null">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/SQLiteDataBasesCurExch.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -363,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693387983898</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Fiexes: fixe bug where post method dont see params and bug with division at null">
+      <created>1693413809711</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1693413809711</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,6 +415,7 @@
     <MESSAGE value="Refactore: fixed request codes for exchangeRate servlets" />
     <MESSAGE value="AddFile: added bd into project to eqsy deploy" />
     <MESSAGE value="AddFile: added bd into project to easy deploy" />
-    <option name="LAST_COMMIT_MESSAGE" value="AddFile: added bd into project to easy deploy" />
+    <MESSAGE value="Fiexes: fixe bug where post method dont see params and bug with division at null" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fiexes: fixe bug where post method dont see params and bug with division at null" />
   </component>
 </project>
