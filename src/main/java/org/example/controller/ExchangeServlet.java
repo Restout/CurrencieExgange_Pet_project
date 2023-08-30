@@ -37,13 +37,23 @@ public class ExchangeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter writer = resp.getWriter();
         String baseCurrencyCode = req.getParameter("from");
         String targetCurrencyCode = req.getParameter("to");
         String amount = req.getParameter("amount");
+        PrintWriter writer = resp.getWriter();
         if (baseCurrencyCode == null || targetCurrencyCode == null || amount == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.write("Misses one or more parameters");
             return;
+        }
+        Currency baseCurrency = null;
+        Currency targetCurrency = null;
+        try {
+            baseCurrency = currenciesService.getCurrencyByCode(baseCurrencyCode);
+            targetCurrency = currenciesService.getCurrencyByCode(targetCurrencyCode);
+        } catch (EntityNotFoundException e) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            writer.write(e.getMessage());
         }
         BigDecimal ammountDeci = new BigDecimal(amount).setScale(2, RoundingMode.HALF_EVEN);
         ExchangeDTO exchangeDTO = new ExchangeDTO(baseCurrencyCode, targetCurrencyCode, ammountDeci);
@@ -53,16 +63,6 @@ public class ExchangeServlet extends HttpServlet {
             return;
         }
         BigDecimal rate = exchangeAmount.get().divide(ammountDeci).setScale(2, RoundingMode.HALF_EVEN);
-        Currency baseCurrency = null;
-        Currency targetCurrency = null;
-        try {
-            baseCurrency = currenciesService.getCurrencyByCode(baseCurrencyCode);
-            targetCurrency = currenciesService.getCurrencyByCode(targetCurrencyCode);
-        } catch (EntityNotFoundException e) {
-           resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-           writer.write(e.getMessage());
-        }
-
         ExchangeAmountDTO exchangeAmountDTO = new ExchangeAmountDTO(baseCurrency, targetCurrency, rate, ammountDeci, exchangeAmount.get());
         writer.write(objectMapper.writeValueAsString(exchangeAmountDTO));
 

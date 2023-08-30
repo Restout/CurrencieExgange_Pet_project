@@ -2,7 +2,6 @@ package org.example.controller.currency;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.example.exceptions.EntityNotFoundException;
 import org.example.exceptions.UniqueConstraintException;
 import org.example.model.Currency;
 import org.example.service.CurrenciesService;
@@ -45,13 +44,13 @@ public class CurrenciesServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BufferedReader reader = req.getReader();
-        PrintWriter writer = resp.getWriter();
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String id = req.getParameter("id");
         String name = req.getParameter("name");
         String code = req.getParameter("code");
         String sign = req.getParameter("sign");
+        BufferedReader reader = req.getReader();
+        PrintWriter writer = resp.getWriter();
         String requestBody = reader.readLine();
         if (id == null || name == null || code == null || sign == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -65,13 +64,8 @@ public class CurrenciesServlet extends HttpServlet {
         } catch (UniqueConstraintException e) {
             resp.setStatus(409);
             writer.write(e.getMessage());
-
-        } catch (EntityNotFoundException e) {
-            resp.setStatus(404);
-            writer.write(e.getMessage());
         } catch (Exception e) {
             writer.write("Database Exception");
-
             resp.setStatus(500);
         }
 

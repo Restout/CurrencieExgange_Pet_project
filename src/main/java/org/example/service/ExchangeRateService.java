@@ -36,11 +36,12 @@ public class ExchangeRateService {
 
     public ExchangeRate setNewRateToExistExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {
         ExchangeRate exchangeRate = new ExchangeRate(0, exchangeRateDTO.getRate(), new Currency(exchangeRateDTO.getBaseCode()), new Currency(exchangeRateDTO.getTargetCode()));
+        exchangeRateRepository.update(exchangeRate);
         Optional<ExchangeRate> result = exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(exchangeRateDTO.getBaseCode(), exchangeRateDTO.getTargetCode());
         if (result.isEmpty()) {
             throw new EntityNotFoundException();
         }
-        exchangeRateRepository.update(exchangeRate);
+
         return result.get();
     }
 

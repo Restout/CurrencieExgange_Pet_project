@@ -11,26 +11,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="AddFile: added bd into project to easy deploy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/DataSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/DataSource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/CurrenciesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/CurrenciesRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/ExchangeRateRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/ExchangeRateRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/CurrenciesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/CurrenciesService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrencyServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrencyServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRateServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRateServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRatesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRatesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CrudRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CrudRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dockerfile" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -429,16 +414,5 @@
     <MESSAGE value="AddFile: added bd into project to eqsy deploy" />
     <MESSAGE value="AddFile: added bd into project to easy deploy" />
     <option name="LAST_COMMIT_MESSAGE" value="AddFile: added bd into project to easy deploy" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
