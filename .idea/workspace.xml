@@ -9,12 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Fiexes: fixe no autoincrement in currencies">
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Fiexes: changed method to use autoincrement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/CurrenciesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/CurrenciesRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DataSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -379,7 +375,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693415607754</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Fiexes: changed method to use autoincrement">
+      <created>1693416485170</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1693416485170</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +434,8 @@
     <MESSAGE value="AddFile: added bd into project to easy deploy" />
     <MESSAGE value="Fiexes: fixe bug where post method dont see params and bug with division at null" />
     <MESSAGE value="Fiexes: fixe no autoincrement in currencies" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fiexes: fixe no autoincrement in currencies" />
+    <MESSAGE value="Fiexes: changed method to use autoincrement" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fiexes: changed method to use autoincrement" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

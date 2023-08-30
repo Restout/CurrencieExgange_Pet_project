@@ -15,21 +15,21 @@ import java.util.Optional;
 
 public class ExchangeRateRepository implements CrudRepository<ExchangeRate> {
     private final String SELECT_ALL = "SELECT *FROM ExchangeRate " +
-            "JOIN Currencies c ON c.ID=BaseCurrencyId " +
-            "JOIN Currencies c2 ON c2.ID=TargetCurrencyId;";
+            "JOIN Currencie c ON c.ID=BaseCurrencyId " +
+            "JOIN Currencie c2 ON c2.ID=TargetCurrencyId;";
     private final String SELECT_BY_CODES = "SELECT *FROM ExchangeRate er\n" +
-            "JOIN Currencies c ON c.ID=er.BaseCurrencyId\n" +
-            "JOIN Currencies c2 ON c2.ID=er.TargetCurrencyId\n" +
+            "JOIN Currencie c ON c.ID=er.BaseCurrencyId\n" +
+            "JOIN Currencie c2 ON c2.ID=er.TargetCurrencyId\n" +
             "WHERE c.Code LIKE ? AND c2.Code LIKE ?; \n";
     private final String CREATE = "INSERT INTO ExchangeRate (BaseCurrencyId,TargetCurrencyId,Rate) VALUES( " +
-            "(SELECT ID FROM Currencies WHERE Code LIKE ?), " +
-            "(SELECT ID FROM Currencies WHERE Code LIKE ?), ?)";
+            "(SELECT ID FROM Currencie WHERE Code LIKE ?), " +
+            "(SELECT ID FROM Currencie WHERE Code LIKE ?), ?)";
     private final String UPDATE = "UPDATE ExchangeRate" +
             " SET Rate=?" +
             " WHERE BaseCurrencyId=" +
-            "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE ?) " +
+            "(SELECT Currencie.ID FROM Currencie WHERE CODE LIKE ?) " +
             "AND TargetCurrencyId=" +
-            "(SELECT Currencies.ID FROM Currencies WHERE CODE LIKE ?)";
+            "(SELECT Currencie.ID FROM Currencie WHERE CODE LIKE ?)";
 
     @Override
     public List<ExchangeRate> getAll() {
