@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class ExchangeRateRepository implements CrudRepository<ExchangeRate> {
-    DataSource dataSource = org.example.DataSource.getDataSource();
     private final String SELECT_ALL = "SELECT *FROM ExchangeRate " +
             "JOIN Currencies c ON c.ID=BaseCurrencyId " +
             "JOIN Currencies c2 ON c2.ID=TargetCurrencyId;";

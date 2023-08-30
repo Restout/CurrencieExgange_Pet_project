@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.example.dto.ExchangeAmountDTO;
 import org.example.dto.ExchangeDTO;
+import org.example.exceptions.EntityNotFoundException;
 import org.example.model.Currency;
 import org.example.service.CurrenciesService;
 import org.example.service.ExchangeRateService;
@@ -44,7 +45,7 @@ public class ExchangeServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        BigDecimal ammountDeci = new BigDecimal(amount).setScale(2,RoundingMode.HALF_EVEN);
+        BigDecimal ammountDeci = new BigDecimal(amount).setScale(2, RoundingMode.HALF_EVEN);
         ExchangeDTO exchangeDTO = new ExchangeDTO(baseCurrencyCode, targetCurrencyCode, ammountDeci);
         Optional<BigDecimal> exchangeAmount = exchangeRateService.exchangeCurrencies(exchangeDTO);
         if (exchangeAmount.isEmpty()) {
@@ -52,8 +53,15 @@ public class ExchangeServlet extends HttpServlet {
             return;
         }
         BigDecimal rate = exchangeAmount.get().divide(ammountDeci).setScale(2, RoundingMode.HALF_EVEN);
-        Currency baseCurrency = currenciesService.getCurrencyByCode(baseCurrencyCode).get();
-        Currency targetCurrency = currenciesService.getCurrencyByCode(targetCurrencyCode).get();
+        Currency baseCurrency = null;
+        Currency targetCurrency = null;
+        try {
+            baseCurrency = currenciesService.getCurrencyByCode(baseCurrencyCode);
+            targetCurrency = currenciesService.getCurrencyByCode(targetCurrencyCode);
+        } catch (EntityNotFoundException e) {
+           resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+           writer.write(e.getMessage());
+        }
 
         ExchangeAmountDTO exchangeAmountDTO = new ExchangeAmountDTO(baseCurrency, targetCurrency, rate, ammountDeci, exchangeAmount.get());
         writer.write(objectMapper.writeValueAsString(exchangeAmountDTO));

@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.Optional;
 
 @WebServlet("/exchangeRate/*")
 public class ExchangeRateServlet extends HttpServlet {
@@ -49,12 +48,20 @@ public class ExchangeRateServlet extends HttpServlet {
         String[] params = Utils.getParametersOfRequestFromURL(req);
         if (params.length <= 2) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.write("Miss correct code of one or more currencies");
             return;
         }
         String baseCurrency = params[2].substring(0, 3);
         String targetCurrency = params[2].substring(3);
-        Optional<ExchangeRate> exchangeRateOptional = exchangeRateService.getExchangeRateByBaseAndTargetCurrencies(baseCurrency, targetCurrency);
-        writer.write(objectMapper.writeValueAsString(exchangeRateOptional.get()));
+
+        ExchangeRate exchangeRate = null;
+        try {
+            exchangeRate = exchangeRateService.getExchangeRateByBaseAndTargetCurrencies(baseCurrency, targetCurrency);
+        } catch (EntityNotFoundException e) {
+            resp.setStatus(404);
+            writer.write(e.getMessage());
+        }
+        writer.write(objectMapper.writeValueAsString(exchangeRate));
     }
 
     protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -63,12 +70,14 @@ public class ExchangeRateServlet extends HttpServlet {
         String requestBody = reader.readLine();
         if (requestBody == null && !requestBody.contains("rate=")) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.write("Miss rate parameter");
             return;
         }
         String rate = requestBody.replaceAll("rate=", "");
         String[] params = Utils.getParametersOfRequestFromURL(req);
         if (params.length <= 2) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.write("Miss correct code of one or more currencies");
             return;
         }
         String baseCurrency = params[2].substring(0, 3);

@@ -9,16 +9,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Refactore: fixed request codes for exchangeRate servlets">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/SQLiteDataBasesCurExch.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/dockerfile" afterDir="false" />
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="AddFile: added bd into project to easy deploy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/JdbcTemplate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/DataSource.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/DataSource.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/controller/ExchangeServlet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/CurrenciesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/CurrenciesRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/ExchangeRateRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/repository/ExchangeRateRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/CurrenciesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/CurrenciesService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/ExchangeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrencyServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrencyServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRateServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRateServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRatesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRatesServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CrudRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CrudRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/CurrenciesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/repository/ExchangeRateRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/CurrenciesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dockerfile" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,37 +74,37 @@
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
-        <option name="jdkForImporter" value="#JAVA_HOME" />
+        <option name="jdkForImporter" value="17" />
         <option name="workspaceImportEnabled" value="true" />
       </MavenImportingSettings>
     </option>
   </component>
   <component name="MavenRunner">
-    <option name="jreName" value="#JAVA_HOME" />
+    <option name="jreName" value="17" />
   </component>
   <component name="ProjectId" id="2UKuAhkcTOXVN1jTRNudqaJ7l4Z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/IdeaProjects/CurrenciesExchange/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/IdeaProjects/CurrenciesExchange/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.importing&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\IdeaProjects\CurrenciesExchange\src\main\resources" />
@@ -114,18 +126,16 @@
     </configuration>
     <configuration name="Tomcat 9.0.72" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.72" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8081/" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="CurrenciesExchange:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/CurrenciesExchange_war_exploded" />
+            <option name="CONTEXT_PATH" value="" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="fbaf8315-5e15-44a5-8993-898bf2079757" />
-        <option name="HTTP_PORT" value="8081" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -225,7 +235,8 @@
       <workItem from="1693382083972" duration="893000" />
       <workItem from="1693383044858" duration="75000" />
       <workItem from="1693383365821" duration="1503000" />
-      <workItem from="1693385209459" duration="2290000" />
+      <workItem from="1693385209459" duration="6927000" />
+      <workItem from="1693409874297" duration="1001000" />
     </task>
     <task id="LOCAL-00001" summary="FirstTestServlet">
       <created>1692705937131</created>
@@ -360,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693229013228</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="AddFile: added bd into project to easy deploy">
+      <created>1693387983898</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1693387983898</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -408,6 +426,19 @@
     <MESSAGE value="Refactore: made base crud repository to inherite other repositories" />
     <MESSAGE value="Refactore: fixed request codes for CurrenciesServlet and CurrencyServlet" />
     <MESSAGE value="Refactore: fixed request codes for exchangeRate servlets" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactore: fixed request codes for exchangeRate servlets" />
+    <MESSAGE value="AddFile: added bd into project to eqsy deploy" />
+    <MESSAGE value="AddFile: added bd into project to easy deploy" />
+    <option name="LAST_COMMIT_MESSAGE" value="AddFile: added bd into project to easy deploy" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/controller/currency/CurrenciesServlet.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

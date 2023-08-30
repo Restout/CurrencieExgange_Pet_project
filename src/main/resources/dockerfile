@@ -1,5 +1,0 @@
-FROM openjdk:17
-ADD /target/CurrenciesExchange-1.0-SNAPSHOT.war backend.war
-COPY ./out/production/DockerHelloWorld/ /tmp
-WORKDIR /tmp
-ENTRYPOINT ["java","-jar", "backend.jar"]

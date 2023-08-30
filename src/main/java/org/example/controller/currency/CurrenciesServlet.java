@@ -2,6 +2,7 @@ package org.example.controller.currency;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.example.exceptions.EntityNotFoundException;
 import org.example.exceptions.UniqueConstraintException;
 import org.example.model.Currency;
 import org.example.service.CurrenciesService;
@@ -15,7 +16,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet("/currencies")
 public class CurrenciesServlet extends HttpServlet {
@@ -47,24 +47,34 @@ public class CurrenciesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader reader = req.getReader();
-     String id=req.getParameter("id");
-        String name=req.getParameter("name");
-        String code=req.getParameter("code");
-        String sign=req.getParameter("sign");
-        if(id==null||name==null||code==null||sign==null){
+        PrintWriter writer = resp.getWriter();
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String code = req.getParameter("code");
+        String sign = req.getParameter("sign");
+        String requestBody = reader.readLine();
+        if (id == null || name == null || code == null || sign == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.write("Miss one or more parameters");
             return;
         }
-        Currency currency=new Currency(Integer.valueOf(id),code,name,sign);
+        Currency currencyToPut = new Currency(Integer.valueOf(id), code, name, sign);
         try {
-            Optional<Currency> currencyOptional = currenciesService.setNewCurrency(currency);
-            PrintWriter writer = resp.getWriter();
-            writer.write(objectMapper.writeValueAsString(currencyOptional.get()));
+            Currency currency = currenciesService.setNewCurrency(currencyToPut);
+            writer.write(objectMapper.writeValueAsString(currency));
         } catch (UniqueConstraintException e) {
             resp.setStatus(409);
+            writer.write(e.getMessage());
+
+        } catch (EntityNotFoundException e) {
+            resp.setStatus(404);
+            writer.write(e.getMessage());
         } catch (Exception e) {
+            writer.write("Database Exception");
+
             resp.setStatus(500);
         }
+
 
     }
 }

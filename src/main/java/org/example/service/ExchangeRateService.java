@@ -20,8 +20,12 @@ public class ExchangeRateService {
         return exchangeRateRepository.getAll();
     }
 
-    public Optional<ExchangeRate> getExchangeRateByBaseAndTargetCurrencies(String base, String target) {
-        return exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(base, target);
+    public ExchangeRate getExchangeRateByBaseAndTargetCurrencies(String base, String target) throws EntityNotFoundException {
+        Optional<ExchangeRate> exchangeRate = exchangeRateRepository.getExchangeRateByBaseAndTargetCurrencies(base, target);
+        if(exchangeRate.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        return exchangeRate.get();
     }
 
     public Optional<ExchangeRate> putNewExchangeRate(ExchangeRateDTO exchangeRateDTO) throws SQLException {

@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.exceptions.EntityNotFoundException;
 import org.example.exceptions.UniqueConstraintException;
 import org.example.model.Currency;
 import org.example.repository.CurrenciesRepository;
@@ -19,11 +20,15 @@ public class CurrenciesService {
         return currenciesRepository.getAll();
     }
 
-    public Optional<Currency> getCurrencyByCode(String code) {
-        return currenciesRepository.getCurrencyByCode(code);
+    public Currency getCurrencyByCode(String code) throws EntityNotFoundException {
+        Optional<Currency> optionalCurrency = currenciesRepository.getCurrencyByCode(code);
+        if(optionalCurrency.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        return optionalCurrency.get();
     }
 
-    public Optional<Currency> setNewCurrency(Currency currency) throws UniqueConstraintException {
+    public Currency setNewCurrency(Currency currency) throws UniqueConstraintException, EntityNotFoundException {
         try {
             currenciesRepository.create(currency);
         } catch (SQLException e) {

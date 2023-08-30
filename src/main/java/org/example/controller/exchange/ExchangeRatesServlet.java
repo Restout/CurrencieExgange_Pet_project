@@ -47,6 +47,7 @@ public class ExchangeRatesServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         if (baseCode == null || targetCode == null || rate == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            writer.write("Miss one or more parameters");
             return;
         }
         ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO(baseCode, targetCode, new BigDecimal(rate));

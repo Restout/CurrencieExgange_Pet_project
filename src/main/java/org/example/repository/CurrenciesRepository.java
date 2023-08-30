@@ -1,9 +1,7 @@
 package org.example.repository;
 
-import org.example.DataSource;
 import org.example.exceptions.Validator;
 import org.example.model.Currency;
-import org.sqlite.SQLiteDataSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class CurrenciesRepository implements CrudRepository<Currency> {
-    SQLiteDataSource dataSource = DataSource.getDataSource();
     private final String SELECT_ALL = "SELECT * FROM Currencies";
     private final String SELECT_BY_CODE = "SELECT * FROM Currencies WHERE Code LIKE ?";
     private final String INSERT = "INSERT INTO Currencies (ID,Code,Fullname,Sign) VALUES (?,?,?,?)";
@@ -41,18 +38,20 @@ public class CurrenciesRepository implements CrudRepository<Currency> {
         return result;
     }
     public Optional<Currency> getCurrencyByCode(String code) {
-        Optional<Currency> result;
+        Optional<Currency> result = Optional.empty();
         try (Connection con = dataSource.getConnection()) {
             PreparedStatement preparedStatement = con.prepareStatement(SELECT_BY_CODE);
-            preparedStatement.setString(1,code);
+            preparedStatement.setString(1, code);
             ResultSet resultSet = preparedStatement.executeQuery();
-            result = Optional.of(Currency
-                    .builder()
-                    .id(resultSet.getInt("ID"))
-                    .code(resultSet.getString("Code"))
-                    .fullName(resultSet.getString("FullName"))
-                    .sign(resultSet.getString("Sign"))
-                    .build());
+            if (resultSet.next()) {
+                result = Optional.of(Currency
+                        .builder()
+                        .id(resultSet.getInt("ID"))
+                        .code(resultSet.getString("Code"))
+                        .fullName(resultSet.getString("FullName"))
+                        .sign(resultSet.getString("Sign"))
+                        .build());
+            }
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
