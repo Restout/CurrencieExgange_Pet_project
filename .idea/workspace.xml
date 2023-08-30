@@ -9,12 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Refactore: fixed request codes for CurrenciesServlet and CurrencyServlet">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/exceptions/EntityNotFoundException.java" afterDir="false" />
+    <list default="true" id="e63c212f-6af5-4fde-ae96-1414e9a8708d" name="Changes" comment="Refactore: fixed request codes for exchangeRate servlets">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/SQLiteDataBasesCurExch.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRateServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRateServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRatesServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/controller/exchange/ExchangeRatesServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/ExchangeRateService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/JdbcTemplate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/dto/ExchangeRateDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/war_exploded/WEB-INF/classes/org/example/service/ExchangeRateService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DataSource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,11 +36,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -58,9 +62,13 @@
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
+        <option name="jdkForImporter" value="#JAVA_HOME" />
         <option name="workspaceImportEnabled" value="true" />
       </MavenImportingSettings>
     </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="jreName" value="#JAVA_HOME" />
   </component>
   <component name="ProjectId" id="2UKuAhkcTOXVN1jTRNudqaJ7l4Z" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -73,6 +81,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/IdeaProjects/CurrenciesExchange/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,10 +89,15 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.customizations",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\CurrenciesExchange\src\main\resources" />
+    </key>
+  </component>
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.72">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.Main" />
@@ -100,6 +114,7 @@
     </configuration>
     <configuration name="Tomcat 9.0.72" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.72" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="17" nameIsGenerated="true">
       <option name="OPEN_IN_BROWSER" value="false" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8081/" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="CurrenciesExchange:war exploded">
@@ -206,7 +221,11 @@
       <option name="presentableId" value="Default" />
       <updated>1692700460427</updated>
       <workItem from="1692700461979" duration="4571000" />
-      <workItem from="1692777970498" duration="67808000" />
+      <workItem from="1692777970498" duration="76057000" />
+      <workItem from="1693382083972" duration="893000" />
+      <workItem from="1693383044858" duration="75000" />
+      <workItem from="1693383365821" duration="1503000" />
+      <workItem from="1693385209459" duration="2290000" />
     </task>
     <task id="LOCAL-00001" summary="FirstTestServlet">
       <created>1692705937131</created>
@@ -334,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693228305681</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Refactore: fixed request codes for exchangeRate servlets">
+      <created>1693229013228</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1693229013228</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +377,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="CurrencieExchange/main" />
                       </list>
                     </value>
                   </entry>
@@ -381,6 +407,7 @@
     <MESSAGE value="Refactore: change access modifier to ExchangeRateRepository" />
     <MESSAGE value="Refactore: made base crud repository to inherite other repositories" />
     <MESSAGE value="Refactore: fixed request codes for CurrenciesServlet and CurrencyServlet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactore: fixed request codes for CurrenciesServlet and CurrencyServlet" />
+    <MESSAGE value="Refactore: fixed request codes for exchangeRate servlets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactore: fixed request codes for exchangeRate servlets" />
   </component>
 </project>
