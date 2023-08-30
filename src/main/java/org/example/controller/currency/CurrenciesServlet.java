@@ -45,19 +45,17 @@ public class CurrenciesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String id = req.getParameter("id");
         String name = req.getParameter("name");
         String code = req.getParameter("code");
         String sign = req.getParameter("sign");
         BufferedReader reader = req.getReader();
         PrintWriter writer = resp.getWriter();
-        String requestBody = reader.readLine();
-        if (id == null || name == null || code == null || sign == null) {
+        if ( name == null || code == null || sign == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             writer.write("Miss one or more parameters");
             return;
         }
-        Currency currencyToPut = new Currency(Integer.valueOf(id), code, name, sign);
+        Currency currencyToPut = new Currency(0, code, name, sign);
         try {
             Currency currency = currenciesService.setNewCurrency(currencyToPut);
             writer.write(objectMapper.writeValueAsString(currency));

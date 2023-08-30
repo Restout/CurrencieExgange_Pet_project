@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class CurrenciesRepository implements CrudRepository<Currency> {
-    private final String SELECT_ALL = "SELECT * FROM Currencies";
-    private final String SELECT_BY_CODE = "SELECT * FROM Currencies WHERE Code LIKE ?";
-    private final String INSERT = "INSERT INTO Currencies (ID,Code,Fullname,Sign) VALUES (?,?,?,?)";
+    private final String SELECT_ALL = "SELECT * FROM Currencie";
+    private final String SELECT_BY_CODE = "SELECT * FROM Currencie WHERE Code LIKE ?";
+    private final String INSERT = "INSERT INTO Currencie (Code,Fullname,Sign) VALUES (?,?,?)";
 
 
     @Override
@@ -62,10 +62,9 @@ public class CurrenciesRepository implements CrudRepository<Currency> {
     public void create(Currency currency) throws SQLException {
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
-            preparedStatement.setInt(1, currency.getId());
-            preparedStatement.setString(2, currency.getCode());
-            preparedStatement.setString(3, currency.getFullName());
-            preparedStatement.setString(4, currency.getSign());
+            preparedStatement.setString(1, currency.getCode());
+            preparedStatement.setString(2, currency.getFullName());
+            preparedStatement.setString(3, currency.getSign());
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Record inserted successfully");
